@@ -28,45 +28,54 @@ public class Accumulator {
                This protection is implemented by the compiler (compiler? JVM?)
                The following code violates the restriction:
               */
-            // [code that violates the restriction]
+            // if (list.get(el).startsWith(prefix))
+	    //     result += list.get(el);
 
             /*
              predicted error message:
-
+		method startsWith() not found in class Object
              actual error message:
+		error: cannot find symbol
+			if(list.get(el).startsWith(prefix))
+				       ^
+		symbol:	method startsWith(String)
+		location: class Object
              */
 
 
             /* 4.  Workaround 0
                A programmer should expect there to be a way to
                work around the stumbling block, because
-               the ___________ (compiler? JVM?)
+               the both (compiler? JVM?)
                knows the type of an element.
 
-               Java's ___________ operator identifies the type
-               of an element to the ___________ (compiler? JVM?).
+               Java's instanceof operator identifies the type
+               of an element to the compiler (compiler? JVM?).
              */
 
 
             /* 5.  Stumbling block 1
                However, use of the operator alone is insufficient,
-               because the ___________ (compiler? JVM?)
+               because the compiler (compiler? JVM?)
                objects to the following code that adds use of
                the operator to the code from Stumbling block 0:
              */
 
-	        //
+	        // if (list.get(el) instanceof String)
+		//     if (list.get(el).startsWith(prefix))
+		//         result += list.get(el);
 
             /*
              predicted error message:
-
+		same as previous
              actual error message:
+	     	same as previous
              */
 
 
             /* 6. Workaround 1
-               Programmers use Java's _____________ operator
-               to tell the ___________ (compiler? JVM?)
+               Programmers use Java's cast operator
+               to tell the compiler (compiler? JVM?)
                that code uses a subclass's method on an object,
                even though the reference to the object is stored
                in a super-class variable.
@@ -75,17 +84,19 @@ public class Accumulator {
 
             /* 7. Stumbling block 2
                However, use of this operator alone is insufficient,
-               because the ___________ (compiler? JVM?)
+               because the JVM (compiler? JVM?)
                objects to the following code that adds use of
                the operator to the code from Stumbling block 0:
              */
 
-            // [code that illustrates the use of the operator]
+            // if (((String) list.get(el).).startsWith(prefix))
+	    //     result += list.get(el);
 
             /*
              predicted error message:
-
+		Double cannot be cast to String
              actual error message:
+	     	java.lang.Double cannot be cast to java.lang.String
              */
 
 
@@ -95,7 +106,9 @@ public class Accumulator {
                elements in the list that support the method.
              */
 
-            // [working code here, finally]
+	if (list.get(el) instanceof String)
+	    if (((String) list.get(el)).startsWith(prefix))
+	        result += list.get(el);
 
         return result;
     }
