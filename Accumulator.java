@@ -25,7 +25,7 @@ public class Accumulator {
                elements in list when some elements of the list might
                omit support for a particular operation.
 
-               This protection is implemented by the ___________ (compiler? JVM?)
+               This protection is implemented by the compiler (compiler? JVM?)
                The following code violates the restriction:
               */
             // [code that violates the restriction]
@@ -55,7 +55,7 @@ public class Accumulator {
                the operator to the code from Stumbling block 0:
              */
 
-            // [code that illustrates the use of the operator]
+	        //
 
             /*
              predicted error message:
